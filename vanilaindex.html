@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <span id="spn">total clicked : 0</span>
+<button id="btn">click this</button>    
+</body>
+
+<script>
+    const spn = document.getElementById("spn");
+    const btn = document.getElementById("btn");
+    
+    let count = 0;
+    
+    const handleClick = function() {
+        console.log("this is way to interactive app in js");
+        count += 1
+        spn.innerText = `total clicked : ${count}`; 
+     };
+
+    btn.addEventListener("click", handleClick);
+</script>
+</html>
