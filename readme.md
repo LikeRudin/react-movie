@@ -1,4 +1,4 @@
-# 2.1
+# 2.1 Before React
 
 바닐라 js로 interactive 한 앱을 만들기
 
@@ -21,7 +21,7 @@ span으로 클릭 횟수를 세어보자
 
 환기: 이것을 리액트로 만들면 엄청 쉽다
 
-# 2.2
+# 2.2 Our First React Element
 
 리액트 설치
 react와 reactDOM 스크립트를 두개 설치해야한다.
@@ -58,5 +58,82 @@ issue: ReactDom이 아니라 ReactDOM 이다.
     const span = React.createElement("span", {id: "sexy-span"});
     ReactDOM.createRoot(root).render(span);
 </script>
+
+```
+
+# 2.3 Events in React
+
+처음에 1강에서 만들었던것처럼
+
+interactive한 웹페이지를 만들어보자.
+이번엔 React.createElement를 이용해서 js 내부에서 만들자.
+
+특정 이벤트 `A`에 대한 이벤트리스너는 on`A` 형식으로 사용할 수있다.
+
+```
+const btn = React.createElement(
+   "button",
+   { onClick: () => console.log("i'm clicked"),
+      style: {
+         backgroundColor: "tomato",
+      }
+   },
+   "click me"
+);
+```
+
+리액트의 강력함으로 frontend 코드와 html 코드를 별개로 만들 필요가 없다.
+
+### vanila js vs react js
+
+vanila js
+
+1. html button 태그 생성
+2. addEventListener를 부착
+3. eventHandler 함수 생성
+
+react js
+
+1. js button 생성, 생성중에 eventListener + eventHanlder 기능의 attr을 삽입
+
+### 여러개의 태그를 묶는 div를 생성
+
+```
+const container = React.createElement("div", null, [span, btn])
+```
+
+### React.createElement 문서
+
+doc 링크: https://react.dev/reference/react/createElement
+
+React.createElement(type, props, ...children)
+
+children
+
+```
+...children: Zero or more child nodes.
+They can be any React nodes, including React elements, strings, numbers, portals,
+ empty nodes (null, undefined, true, and false), and arrays of React nodes.
+
+```
+
+# 2.4 Recap
+
+1. react를 사용하려면 react 엔진인 React, html을 컨트롤하기위한 ReactDOM을 전부 설치해야한다.
+
+2. ReactDOM의 DOM은 대문자 세개로 이루어져 있다.
+
+3. interactive한 웹페이지- 즉 프론트 엔드 페이지를 만들때 쓰인다
+
+4. js는 frontent와 html이 분리된다. js와 html을 따로 코딩해주어야한다.
+
+5. react는 ReactDOM태그를 생성중에 여러가지 설정 및 이벤트 핸들러 등록을 할 수 있다.
+
+- 기타 디테일
+
+```
+  ReactDOM.createRoot(root).render(생성 컴포넌트);
+
+  React.createElement("태그명", {태그 속성 및 이벤트 핸들러 오브젝트}, innerHTML - 여러개인경우 배열 [] 로 묶는다)
 
 ```

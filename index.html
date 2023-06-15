@@ -14,7 +14,19 @@
         }
     },
         "this is a span");
-    ReactDOM.createRoot(root).render(span);
+    const btn = React.createElement(
+        "button",
+        { 
+            onClick: () => console.log("i'm clicked"),
+            style: {
+                backgroundColor: "tomato",
+            }
+        },
+        "click me"
+        );
+
+    const container = React.createElement("div", null, [span, btn])
+    ReactDOM.createRoot(root).render(container);
 </script>    
 
 </html>
