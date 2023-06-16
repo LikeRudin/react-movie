@@ -5,28 +5,42 @@
 </body>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script>
-    const root = document.getElementById("root");
-    const span = React.createElement("span", {
-        id: "sexy-span",
-        style: {
-            color: "tomato"
-        }
-    },
-        "this is a span");
-    const btn = React.createElement(
-        "button",
-        { 
-            onClick: () => console.log("i'm clicked"),
-            style: {
-                backgroundColor: "tomato",
-            }
-        },
-        "click me"
-        );
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    const container = React.createElement("div", null, [span, btn])
-    ReactDOM.createRoot(root).render(container);
+<script type="text/babel">
+    const root = document.getElementById("root");
+    const Span = () => {
+        return (
+            <span
+            id="sexy-span"
+            style={{ backgroundColor:"tomato" }}
+            >
+            this is a span
+         </span>
+         )
+        };
+
+    const Btn = () => {
+        return (
+            <button
+                id="btn"
+                onClick={ ()=> console.log("i'm clicked")}
+            >
+                Click me
+            </button>
+            );
+    }
+
+    const Container = () => {
+        return (
+            <div>
+                <Span/>
+                <Btn/>
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(root).render(<Container />);
 </script>    
 
 </html>

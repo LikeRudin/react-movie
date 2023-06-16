@@ -119,15 +119,22 @@ They can be any React nodes, including React elements, strings, numbers, portals
 
 # 2.4 Recap
 
-1. react를 사용하려면 react 엔진인 React, html을 컨트롤하기위한 ReactDOM을 전부 설치해야한다.
+1. react를 사용하려면 React, ReactDOM을 전부 설치해야한다.
+
+   - 엔진, HTML handle tool
 
 2. ReactDOM의 DOM은 대문자 세개로 이루어져 있다.
 
-3. interactive한 웹페이지- 즉 프론트 엔드 페이지를 만들때 쓰인다
+3. interactive한 웹페이지를 만드는데 쓰인다.
 
-4. js는 frontent와 html이 분리된다. js와 html을 따로 코딩해주어야한다.
+   - 즉 프론트 엔드 페이지를 만들때 쓰인다
 
-5. react는 ReactDOM태그를 생성중에 여러가지 설정 및 이벤트 핸들러 등록을 할 수 있다.
+4. js는 frontent와 html이 분리된다.
+
+   - js와 html을 따로 코딩해주어야한다.
+
+5. react는 js 하나만 코딩하면 된다.
+   - ReactDOM태그를 생성하는 동시에 여러가지 설정 및 이벤트 핸들러 등록을 할 수 있다.
 
 - 기타 디테일
 
@@ -136,4 +143,95 @@ They can be any React nodes, including React elements, strings, numbers, portals
 
   React.createElement("태그명", {태그 속성 및 이벤트 핸들러 오브젝트}, innerHTML - 여러개인경우 배열 [] 로 묶는다)
 
+```
+
+# 2.5 JSX
+
+`React.createElement` 를 대체해보자
+
+component 라는것을 사용해서 html 태그를 생성할것이다.
+
+- 컴포넌트의 특징
+
+  - 함수이다.
+    - function , 메서드, arrow function 형태 모두 사용가능
+  - jsx 를 반환한다
+
+- JSX의 특징
+  - HTML 처럼 생겼다.
+  - string을 제외한 모든 자바스크립트 코드는{} 내부에 작성한다.
+
+지금까지 사용한 코드
+
+```
+ const span = React.createElement("span", {
+        id: "sexy-span",
+        style: {
+            color: "tomato"
+        }
+    },
+        "this is a span");
+```
+
+jsx를 반환하는 컴포넌트
+
+```
+   const Span = () => {
+        return (
+            <span
+            id="sexy-span"
+            style={{ backgroundColor:"tomato" }}
+            >
+            this is a span
+         </span>
+         )
+        };
+
+   const Btn = () => {
+        return (
+            <button
+                id="btn"
+                onClick={ ()=> console.log("i'm clicked")}
+            >
+                Click me
+            </button>
+            );
+    }
+```
+
+style이나 이벤트 리스너에는 오브젝트를 할당한다.
+
+### 주의할점
+
+- 컴포넌트 함수는 반드시 대문자로 시작해야한다.
+
+  - 그냥 소문자로 작성하면, html과 구분하지 못한다.
+
+<br>
+
+- 컴포넌트를 렌더링할때에는 `<Component/>` 형식으로 작성해야한다.
+
+  - HTML Singleton Tags 형태
+
+  - 예시 ReactDom.createroot(root).render(<JsxComponet/>)
+
+  - 그냥 Component를 넣어주면 함수 호출을 하는것
+
+### bug fix
+
+브라우저가 리액트를 실행할 수 있도록 스크립트를 추가해주어야 한다.
+
+Error message
+
+```
+transformScriptTags.ts:252 You are using the in-browser Babel transformer. Be sure to precompile your scripts for production - https://babeljs.io/docs/setup/
+```
+
+```
+1. 바벨 실행 스크립트 코드
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+2. 바벨 타겟 설정
+
+<script type="text/babel">
 ```
