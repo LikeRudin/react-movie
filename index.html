@@ -18,7 +18,7 @@
         let [count, setCount] = React.useState(0);
         
         const countUp = () => {
-            setCount(count + 1);
+            setCount((item) => item + 1);
             };
         
         return (

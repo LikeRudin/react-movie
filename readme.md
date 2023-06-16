@@ -387,3 +387,31 @@ const food = ["tomato", "potato"];
 
 const [firstFood, secondFood] = food;
 ```
+
+# 3.4 State Functions
+
+state를 설정하는 두가지 방법
+
+1. 새값을 넣어주는것
+
+- setSomething("hello");
+
+2. 이전 값을 이용해서 업데이트 하는것
+
+- setSomething(something + "hi");
+
+두번째 방법을 사용하고 싶다면, setSomething의 인자로 함수를 넣어주는것을 추천한다.
+
+```
+setSomething(something +1);
+```
+
+위의 코드보다 아래의 코드가 낫다.
+
+```
+setSomething((item) => item + 1);
+```
+
+why?
+
+- something의 정확한 철자를 체크해줄 필요가 없다.
