@@ -333,3 +333,57 @@ https://react.dev/reference/react-dom/client/createRoot#root-render
 하지만 리액트는 가상돔으로 일부분만 수정해서 던저준다.
 
 render tree 형성을 최적화 하여 빠르게 페이지를 그려주는것이 프론트의 쟁점중 하나.
+
+# 3.1 setState
+
+state가 변경될때마다 re-render를 위해
+컴포넌트 내부 메서드를 호출하는 방식은 별로 좋지않다.
+
+리액트에는 state가 변경될경우 자동으로 render해주는 기능이 있다.
+
+그것이 useState이다
+
+useState를 사용하면, 값 변경 + render를 한번에 수행할 수 있다.
+
+```
+let [sth, setSth] = React.useState(sth의 초깃값);
+```
+
+sth은 변수이고, setSth은 해당 변수를 변경하는 함수이다.
+
+setSth은 sth를 입력받은 인자로 변환하는 역할을 한다.
+
+### useState 사용하기
+
+```
+ const countUp = () => {
+            count += 1;
+            renderPage();
+        }
+
+        const renderPage = () => root.render(<Container/>);
+```
+
+위의 코드를 아래와 같이 고칠 수 있다.
+
+```
+  let [count, setCount] = React.useState(0);
+
+        const countUp = () => {
+            setCount(count + 1);
+        };
+```
+
+render 부분을 정의하지않고도 자동으로 사용할 수 있게된다.
+
+<br>
+
+### 배열의 구조분해 할당
+
+한개의 선언문으로 배열안의 변수를 각각 저장할 수 있다.
+
+```
+const food = ["tomato", "potato"];
+
+const [firstFood, secondFood] = food;
+```

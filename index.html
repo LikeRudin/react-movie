@@ -15,12 +15,11 @@
     const Container = () => {
         
 
+        let [count, setCount] = React.useState(0);
+        
         const countUp = () => {
-            count += 1;
-            renderPage();
-        } 
-
-        const renderPage = () => root.render(<Container/>);
+            setCount(count + 1);
+            };
         
         return (
             <div>
