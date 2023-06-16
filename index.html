@@ -8,39 +8,41 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-    const root = document.getElementById("root");
-    const Span = () => {
-        return (
-            <span
-            id="sexy-span"
-            style={{ backgroundColor:"tomato" }}
-            >
-            this is a span
-         </span>
-         )
-        };
-
-    const Btn = () => {
-        return (
-            <button
-                id="btn"
-                onClick={ ()=> console.log("i'm clicked")}
-            >
-                Click me
-            </button>
-            );
-    }
-
+    const rootTag = document.getElementById("root");
+ 
+    let count = 0;
+    
     const Container = () => {
+        
+
+        const countUp = () => {
+            count += 1;
+            renderPage();
+        } 
+
+        const renderPage = () => root.render(<Container/>);
+        
         return (
             <div>
-                <Span/>
-                <Btn/>
+                <span
+                > 
+                total clicks : {count}
+                </span>
+                
+                <button
+                id="btn"
+                style={{backgroundColor: "tomato"}}
+                onClick={countUp}
+                >
+                click me
+                </button>
             </div>
         );
     }
 
-    ReactDOM.createRoot(root).render(<Container />);
+    const root = ReactDOM.createRoot(rootTag);
+    root.render(<Container/>);
+
 </script>    
 
 </html>

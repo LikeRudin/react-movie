@@ -217,6 +217,9 @@ style이나 이벤트 리스너에는 오브젝트를 할당한다.
 
   - 그냥 Component를 넣어주면 함수 호출을 하는것
 
+- 컴포넌트의 장점
+  - 코드 재사용에 유리하다
+
 ### bug fix
 
 브라우저가 리액트를 실행할 수 있도록 스크립트를 추가해주어야 한다.
@@ -234,4 +237,99 @@ transformScriptTags.ts:252 You are using the in-browser Babel transformer. Be su
 2. 바벨 타겟 설정
 
 <script type="text/babel">
+
+이후 브라우저의 개발자 도구 -element에서 변환된 코드를 볼 수 있다.
 ```
+
+# 3.0 Understanding State
+
+state: 값이 바뀌는 변수 (혹은 property)
+
+하나의 Component 내부에
+자바스크립트 변수와 메서드를 만들어줄 수 있다.
+
+```
+    const Container = () => {
+        let count = 0;
+
+        const countUp = () => {
+            count += 1;
+        }
+
+        const renderPage = root.render(<Container />);
+
+        return (
+            <div>
+                <span
+                >
+                total clicks : {count}
+                </span>
+
+                <button
+                id="btn"
+                style={{backgroundColor: "tomato"}}
+                onClick={renderPage}
+                >
+                </button>
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(root).render(<Container />);
+```
+
+### bugfix
+
+Error Message
+
+```
+You are calling ReactDOMClient.createRoot() on a container that has already been passed to createRoot() before. Instead, call root.render() on the existing root instead if you want to update it.
+```
+
+다음 코드를 통해 createRoot를 완료후에는 root를 참조하여 render를 사용해야한다.
+
+```
+ReactDOM.createRoot(root).render(<Container />);
+```
+
+문제코드 수정: Container의 메서드
+
+```
+const renderPage = () => ReactDOM.createRoot(root).render(<Container />);
+
+
+const renderPage = () => root.render(<Container />);
+
+```
+
+이제 다시 TypeError가 발생했다
+
+```
+TypeError: root.render is not a function
+    at renderPage (<anonymous>:10:17)
+```
+
+문서를 읽고 오자 문제점을알았다.
+
+1. ReactDom.createRoot(root) 는 react Node를 반환한다.
+
+   - 해당 ReactNode의 render 메서드를 사용해야한다.
+
+```
+ReactDOM.createRoot(root).render(<Container />);
+
+-> const root = ReactDom.createRoot(rootTag);
+   root.render(<Container/>);
+```
+
+2. let은 함수 내부변수가 아니라 전역변수이다.
+
+https://react.dev/reference/react-dom/client/createRoot#root-render
+
+### 리액트가 좋은점
+
+일반 자바스크립트 브라우저는 DOM 정보가 바뀔때마다 트리를 다시생성한다.
+
+하지만 리액트는 가상돔으로 일부분만 수정해서 던저준다.
+
+render tree 형성을 최적화 하여 빠르게 페이지를 그려주는것이 프론트의 쟁점중 하나.
