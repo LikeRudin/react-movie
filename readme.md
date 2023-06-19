@@ -415,3 +415,47 @@ setSomething((item) => item + 1);
 why?
 
 - something의 정확한 철자를 체크해줄 필요가 없다.
+
+# 3.5 Inputs and State
+
+### JS의 예약어
+
+React에서 JSX를 사용할때, 기존의 HTML과는 다른것이있다.
+
+```
+<label for="" class="">
+```
+
+for과 class는 자바스크립트 예약어이다
+
+그래서 HTMLFor, className과 같은 JSX 전용 성분이름을 사용해야한다.
+
+- react를 production 모드로 사용중이면 오류는 발생하지 않는다.
+
+## SyntheticEvent, nativeEvent
+
+input 에 값을 입력하면
+
+자바스크립트 이벤트 처럼 동작하는 SyntheticEvent를 발생시킨다.
+
+input.target.value를 통해 input의 입력값에 접근할 수 있다.
+
+error: typo Error
+
+```
+attr 의 올바른 이름 htmlFor
+
+ReactDom.createRoot
+```
+
+useState에 초기값을 안넣어주면 나오는 경고메시지
+
+되도록이면 0이든 null 이든 넣어주자.
+
+```
+react-dom.development.js:73 Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
+    at input
+    at div
+    at div
+    at App (<anonymous>:11:31)
+```
