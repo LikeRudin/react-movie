@@ -459,3 +459,52 @@ react-dom.development.js:73 Warning: A component is changing an uncontrolled inp
     at div
     at App (<anonymous>:11:31)
 ```
+
+# 3.6 ~ 3.7 State Practice
+
+분과 초를 변환하는 Super Converter 만들어보자.
+
+하나의 boolean State를 통해 굉장히 다양한것을 컨트롤 할 수 있다.
+
+1. not 을 활용한 input 태그 활성 포커싱
+
+두개의 input중 하나만 활성화 시키는 코드
+
+```
+const [inverse, setInverse] = React.useState(false);
+
+const onClick => setInverse(!inverse);
+
+<input
+placeholder="minutes"
+disabled={inverse}
+/>
+
+
+<input
+placeholder="hours"
+disabled={!inverse}
+/>
+
+<button
+  onClick={onClick}
+>
+</button>
+```
+
+2. tenarary 연산자를 활용한 값 변경
+
+```
+<input
+value={inverse? amount * 60 : amount}
+/>
+
+<input
+value={inverse? amount : Math.floor(amount/60)}
+/>
+
+<button>
+{inverse? "minutes":"hours"}
+</button>
+
+```

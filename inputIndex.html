@@ -11,28 +11,44 @@
 <script type="text/babel">
     const rootTag = document.getElementById("root");
     const App = () => {
-        const [minutes, setMinutes] = React.useState(0);
+        const [amount, setAmount] = React.useState(0);
+        const [inverse, setInverse] = React.useState(false);
+
 
         const onChange = () => {
             console.log("someone submitted something");
-            setMinutes(event.target.value);
+            setAmount(event.target.value);
+        }
+
+        const onClick = () => {
+            setInverse((inverse)=>!inverse);
         }
         return (
             <div>
-                <h4>you submitted this: {minutes} </h4>
+                <h4>you submitted this: {amount} </h4>
                 <h1 className="converter">Super Converter</h1>
                 <div>
-                    <label htmlFor="minutes"> Minutes</label>
+                    <label htmlFor="minutes"> minutes</label>
                     <input
-                    value={minutes}
+                    value={inverse? amount * 60 : amount}
                     onChange={onChange}
                     type="number"
                     id="minutes"
-                    placeholder="MINUTES" />
+                    placeholder="minutes"
+                    disabled={inverse} />
                 </div>
                 <div>
                     <label htmlFor="hours">Hours</label>
-                    <input type="number" id="hours" placeholder="HOURS" />
+                    <input
+                    value={inverse? amount : Math.floor(amount / 60)}
+                    onChange={onChange}
+                    type="number"
+                    id="hours"
+                    disabled={!inverse}
+                    placeholder="HOURS" />
+                </div>
+                <div>
+                    <button onClick={onClick}>{inverse? "hours" : "minutes"}</button>
                 </div>
             </div>
         );
