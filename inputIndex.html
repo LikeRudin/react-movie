@@ -10,7 +10,7 @@
 
 <script type="text/babel">
     const rootTag = document.getElementById("root");
-    const App = () => {
+    const MinutesToHours = () => {
         const [amount, setAmount] = React.useState(0);
         const [inverse, setInverse] = React.useState(false);
 
@@ -26,7 +26,6 @@
         return (
             <div>
                 <h4>you submitted this: {amount} </h4>
-                <h1 className="converter">Super Converter</h1>
                 <div>
                     <label htmlFor="minutes"> minutes</label>
                     <input
@@ -49,6 +48,89 @@
                 </div>
                 <div>
                     <button onClick={onClick}>{inverse? "hours" : "minutes"}</button>
+                </div>
+            </div>
+        );
+    };
+    const KilometersToMiles = () => {
+        const [amount, setAmount] = React.useState(0);
+        const [inverse, setInverse] = React.useState(false);
+
+
+        const onChange = () => {
+            console.log("someone submitted something");
+            setAmount(event.target.value);
+        }
+
+        const onClick = () => {
+            setInverse((inverse)=>!inverse);
+        }
+        return (
+            <div>
+                <h4>you submitted this: {amount} </h4>
+                
+                <div>
+                    <label htmlFor="Kilometers"> Kilometers</label>
+                    <input
+                    value={inverse? Math.floor(amount * 1.609) : amount}
+                    onChange={onChange}
+                    type="number"
+                    id="Kilometers"
+                    placeholder="Kilometers"
+                    disabled={inverse} />
+                </div>
+                <div>
+                    <label htmlFor="miles">Miles</label>
+                    <input
+                    value={inverse? amount : Math.floor(amount * 0.62)}
+                    onChange={onChange}
+                    type="number"
+                    id="miles"
+                    disabled={!inverse}
+                    placeholder="Miles" />
+                </div>
+                <div>
+                    <button onClick={onClick}>{inverse? "Miles?" : "Killometers"}</button>
+                </div>
+            </div>
+        );
+    };
+    const App = () => {
+        const [index, setIndex] = React.useState("default");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return (
+            <div>
+                <h1 className="converter">Super Converter</h1>
+                <div>
+                <select 
+                    value={index} 
+                  onChange={onSelect}
+               >
+                  <option
+                        value="default"
+                  >
+                        please select item to convert
+                  </option>
+                  
+                 <option 
+                     value="time"
+                 >
+                       Minutes and Hours
+                 </option>
+                 
+                <option 
+                     value="distance"
+                 >
+                     Kilometers and Miles
+                 </option>
+                </select>
+                </div>
+                <div>
+                {index === "default" ? "please select option": null}
+                {index === "time" ? <MinutesToHours/>: null}
+                {index === "distance" ? <KilometersToMiles/>: null}
                 </div>
             </div>
         );

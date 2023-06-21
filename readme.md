@@ -508,3 +508,57 @@ value={inverse? amount : Math.floor(amount/60)}
 </button>
 
 ```
+
+# 3.9 Final Practice and Recap
+
+jsx내부에 다음과 같은 방식으로 값을 줄 수 있다.
+
+{"hello"}
+
+### select 태그로 화면전환하기
+
+| 구분  | select | option |
+| ----- | ------ | ------ |
+| value | 현재값 | 옵션값 |
+
+1. select 태그에 eventLister 부착
+
+```
+<select
+  value={index}
+  onChange={onSelect}
+  >
+  <option
+    value="0"
+  >
+    Minutes ＆ Hours
+  </option>
+  <option
+    value="1"
+  >
+    kilometers ＆ Miles
+  </option>
+</select>
+```
+
+tenarary Operator를 이용하면 화면에 render할 컴포넌트를 고를 수 있다.
+
+```
+{index === "0" ? <CompoA/> : <CompoB> }
+```
+
+Error
+
+```
+Uncaught ReferenceError: useState is not defined
+
+단순히 import React from "react"
+
+React.useState임을 명심하자
+
+```
+
+### select 사용법
+
+select의 value가 현재 선택된 값이된다.
+이벤트 리스너도 select 에 붙여준다.
