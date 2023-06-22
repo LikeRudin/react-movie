@@ -5,7 +5,10 @@
     <div id="root"></div>
 </body>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
@@ -32,11 +35,18 @@ const Btn = ({buttonName, onClick}) => {
             {buttonName}
             </button>
         </div>
-    )
-}
+    );
+};
+
+Btn.propTypes = {
+    fav: PropTypes.string.isRequired
+};
+
 
 
 const MemoizedBtn = React.memo(Btn);
+
+
 const App = () => {
     const [value, setValue] = React.useState("New Btn");
     const changeBtnName = () =>{
@@ -60,6 +70,8 @@ const App = () => {
                 fav="thatOne"
                 buttonName="Real Button"
             />
+            <Btn
+            buttonName={5}/>
         </div>
         );
 } 

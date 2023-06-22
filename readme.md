@@ -731,3 +731,33 @@ every children is re-rendered and
 it can be the reason of bad performance
 
 we can control re-render or not like tools `React.memo`
+
+# 4.2 prop Types
+
+like vanila javascript, react doesn't check type for props
+
+by using prop-types package, we can prevent type data types for props
+
+Doc: https://react.dev/reference/react/Component#static-proptypes
+
+```
+We recommend using TypeScript instead of checking prop types at runtime.
+```
+
+### how to use
+
+React Code
+
+```
+Btn.propTypes = {
+    fav: PropTypes.string.isRequired
+};
+```
+
+error Message on console
+
+```
+Warning: Failed prop type: The prop `fav` is marked as required in `Btn`, but its value is `undefined`.
+    at Btn (<anonymous>:15:25)
+    at App (<anonymous>:34:31)
+```
