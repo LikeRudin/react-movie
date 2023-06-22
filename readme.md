@@ -562,3 +562,75 @@ React.useState임을 명심하자
 
 select의 value가 현재 선택된 값이된다.
 이벤트 리스너도 select 에 붙여준다.
+
+# 4.0 props
+
+way to send data from parent compo to child compo
+
+props are similar with params in function.
+
+testing code
+
+```
+
+const PropTest = (props) => {
+    console.log(props);
+    return <h1> this is testing Component</h1>
+}
+
+const App = () => {
+    return <div> <PropTest fav="kimchi" thisisprop={true}/></div>
+}
+```
+
+message on console
+
+```
+Object
+fav: "kimchi"
+thisisprop: true
+```
+
+### caution
+
+component can recieve only one argument (props)
+
+props is an Object.
+we can also give value in props by destructuring assignment.
+like ({buttonName})
+
+hard notation
+
+```
+Compo(props)
+...in compo props.propertyName
+```
+
+## process to build react component
+
+1. make App Component
+
+2. if want to re-use some parts of Component,
+   then seperate from App to another Component
+
+3. if want to change only few part in Component,
+   then define props
+
+```
++@. way to give default value:
+tenarary operator!
+
+question: there is no error if i don't give props?
+
+answer: yes `undefined` is passed
+```
+
+### function Component
+
+all of Component that made by me before was `function Component`
+
+### CSS style Convention
+
+camelCase
+
+remember JSX is a Javascript, not HTML or CSS

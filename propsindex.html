@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div id="root"></div>
+</body>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+const rootTag = document.getElementById("root");
+
+const PropTest = (props) => {
+    console.log(props);
+    return <h1> this is testing Component</h1>
+}
+
+const Btn = ({buttonName}) => {
+    console.log(buttonName);
+    return (
+        <div>
+            <button
+            style={{ 
+                backgroundColor :"tomato",
+                color:"white",
+                padding: "10px 20px",
+                borderRadius: "20px",
+                margin:"15px"    }}>
+            {buttonName}
+            </button>
+        </div>
+    )
+}
+
+const App = () => {
+    return (
+        <div> 
+            <PropTest
+                fav="kimchi"
+                thisisprop={true}
+            />
+
+            <Btn 
+                fav="thisOne"
+                buttonName={"my Magic Button"}
+            />
+
+            <Btn
+                fav="thatOne"
+                
+            />
+        </div>
+        );
+} 
+
+const root = ReactDOM.createRoot(rootTag);
+root.render(<App/>);
+
+</script>
+
+</html>
