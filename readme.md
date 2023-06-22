@@ -634,3 +634,100 @@ all of Component that made by me before was `function Component`
 camelCase
 
 remember JSX is a Javascript, not HTML or CSS
+
+# 4.1 memo
+
+additional info for props
+
+adding EventListener on HTML TAG written in JSX
+like `onClick`, it is a kind of Function.
+
+but when we are adding Onclick at custom component like
+
+```
+<Component onClick={onClickFunction}/>
+```
+
+the `onClick` on that code is a property of props.
+
+But it is not a big deal because we can give function at props and
+it works just same way with original eventListener
+
+but i must menually add that prop on Component
+
+```
+const Component = ({onClick})=> {
+return <button onClick={onClick}>
+        </div>
+}
+
+
+//onClick is a prop
+<Componenet onClick={onCLickFunction}/>
+```
+
+## re-render
+
+if i give useState on App
+then when the state change, every children is re-rendered
+
+Real Button is re-rendered without any meaning
+
+```
+New Btn was rendered
+Real Button was rendered
+
+New Button was rendered
+Real Button was rendered
+```
+
+## memo
+
+doc: https://react.dev/reference/react/memo
+
+component is nomally re-rendered when parents are re-rendered
+but with memo, can skip re-render if there is no change in props
+
+again, memo lets you skip re-rendering a component when its props are unchanged.
+
+```
+const MemoizedComponent = memo(SomeComponent, arePropsEqual?)
+```
+
+### Error
+
+even i changed Btn to MemoizedBtn
+
+still realBtn is re-rendered
+
+- How to fix
+
+declaration with `React.memo` should be located out of `App` component
+
+- good example
+
+```
+const MemoizedBtn = React.memo(Btn);
+
+const App = () => {}
+```
+
+- bad example
+
+```
+
+const App = () => {
+  const MemoizedBtn = React.memo(Btn);
+
+}
+
+```
+
+### notice
+
+when state is changed on parent component
+
+every children is re-rendered and
+it can be the reason of bad performance
+
+we can control re-render or not like tools `React.memo`

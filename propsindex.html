@@ -17,11 +17,12 @@ const PropTest = (props) => {
     return <h1> this is testing Component</h1>
 }
 
-const Btn = ({buttonName}) => {
-    console.log(buttonName);
+const Btn = ({buttonName, onClick}) => {
+    console.log(`${buttonName} was rendered` );
     return (
         <div>
             <button
+            onClick={onClick}
             style={{ 
                 backgroundColor :"tomato",
                 color:"white",
@@ -34,7 +35,14 @@ const Btn = ({buttonName}) => {
     )
 }
 
+
+const MemoizedBtn = React.memo(Btn);
 const App = () => {
+    const [value, setValue] = React.useState("New Btn");
+    const changeBtnName = () =>{
+        setValue("New Button");
+    }
+
     return (
         <div> 
             <PropTest
@@ -42,14 +50,15 @@ const App = () => {
                 thisisprop={true}
             />
 
-            <Btn 
+            <MemoizedBtn 
                 fav="thisOne"
-                buttonName={"my Magic Button"}
+                buttonName={value}
+                onClick={changeBtnName}
             />
 
-            <Btn
+            <MemoizedBtn
                 fav="thatOne"
-                
+                buttonName="Real Button"
             />
         </div>
         );
