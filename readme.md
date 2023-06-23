@@ -124,3 +124,42 @@ useEffect(setup, dependencies?)
 params
 
 `setup` is function running after change state in `dependencies` (Array of states)
+
+# 6.1 useEffect
+
+The goal of section:
+
+making two function in App.js
+
+one should be runned at every update of state
+
+another should be runned only once at first rendering
+
+use useEffect
+
+Q. how to check and deal about change of state?
+
+A. make a button to change state
+
+### Error: onClick doesn't work
+
+because onClick on `<Btn/>` is not an eventListener,
+It is just a prop.
+
+solotion:
+
+1.  give `onClick` eventListener attr in real `<button>` HTML TAG in JSX.
+
+2.  set prop `onClick` on Btn and give `onClick` prop as a value for `onClick` in `<button>`
+
+console
+
+```
+this should be runned only one-time
+this should be runned only one-time
+68 should run for every change of state
+```
+
+### Error2 : `this should be runned only one-time` printed twice
+
+i handled this problem by deleting `<React.StrictMode>` in index.js which was nesting `<App/>`
