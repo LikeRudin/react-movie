@@ -163,3 +163,19 @@ this should be runned only one-time
 ### Error2 : `this should be runned only one-time` printed twice
 
 i handled this problem by deleting `<React.StrictMode>` in index.js which was nesting `<App/>`
+
+# 6.2 Deps
+
+goal of this section:
+
+build a function when keyword for search is changed,
+not for change of every states
+
+basic rule
+
+| runtime       | kind                  | triggered by  |
+| ------------- | --------------------- | ------------- |
+| always        | function in component | every state   |
+| specific time | useEffect             | in dependency |
+
+remember, useEffect is watching dependencies array
