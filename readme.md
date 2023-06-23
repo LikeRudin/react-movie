@@ -52,6 +52,16 @@ we can see some tips on terminal
 
 like `you declared Btn component but never used`
 
+```
+WARNING in [eslint]
+src\App.js
+  Line 2:8:  'ReactDOM' is defined but never used  no-unused-vars
+
+src\Btn.js
+  Line 2:8:  'ReactDOM' is defined but never used  no-unused-vars
+
+```
+
 by using create-react-app boiler plate,
 
 ## rules for building react-app by this
@@ -91,3 +101,26 @@ const Btn = () => {
 
 we can give different css styles
 on components which have same className
+
+# 6.0 Effects introduction
+
+when state changes, every chlidren component is re-rendered
+
+by useEffect, we can give some options for re-rendering
+
+- when specific states change, not for every state
+- don't re-render. once rendered, then don't run the code
+
+Common usage is synchronizing component with outer system
+
+Doc: https://react.dev/reference/react/useEffect
+
+shape
+
+```
+useEffect(setup, dependencies?)
+```
+
+params
+
+`setup` is function running after change state in `dependencies` (Array of states)
